@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.kccorp.comfykids.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,7 +53,7 @@
                     android:id="@+id/value_when"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="12 o'clock"
+                    android:text="@{vm.whenValue}"
                     android:textSize="@dimen/text_content_size" />
 
                 <TextView
@@ -60,7 +67,7 @@
                     android:id="@+id/value_where"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="at home"
+                    android:text="@{vm.whereValue}"
                     android:textSize="@dimen/text_content_size" />
 
                 <TextView
@@ -74,7 +81,7 @@
                     android:id="@+id/value_what"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="dental clinic"
+                    android:text="@{vm.whatValue}"
                     android:textSize="@dimen/text_content_size" />
             </LinearLayout>
 
@@ -83,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:onClick="@{()->vm.onClickButton()}"
                 android:text="Reset" />
 
 
