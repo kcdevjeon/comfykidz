@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:padding="@dimen/layout_padding">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="It will be..."
+            android:textSize="@dimen/label_title_size" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flip three cards to see your future."
+            android:textSize="@dimen/label_description_size" />
+        <include layout="@layout/button_table_layout" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_when"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="when"
+                android:textSize="@dimen/text_title_size" />
+
+            <TextView
+                android:id="@+id/value_when"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12 o'clock"
+                android:textSize="@dimen/text_content_size" />
+            <TextView
+                android:id="@+id/title_where"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="where"
+                android:textSize="@dimen/text_title_size" />
+
+            <TextView
+                android:id="@+id/value_where"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="at home"
+                android:textSize="@dimen/text_content_size" />
+            <TextView
+                android:id="@+id/title_what"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="what"
+                android:textSize="@dimen/text_title_size" />
+
+            <TextView
+                android:id="@+id/value_what"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="dental clinic"
+                android:textSize="@dimen/text_content_size" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Button" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
