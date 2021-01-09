@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings" translatable="false">설정</string>
+    <string name="reset" translatable="false">다시하기</string>
+    <string name="title" translatable="false">너는 이제…</string>
+    <string name="title_hint" translatable="false">카드를 선택하시오.</string>
+</resources>
