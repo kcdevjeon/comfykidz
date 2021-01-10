@@ -18,8 +18,6 @@ object TtsManager {
             if (state == TextToSpeech.SUCCESS) {
                 mTts.language = Locale.getDefault()
                 speak(context.getString(R.string.initialized))
-            } else {
-//                showState("TTS 객체 초기화 중 문제가 발생했습니다.")
             }
         }
     }
@@ -31,11 +29,9 @@ object TtsManager {
     }
 
     fun destroy() {
-        if (mTts != null) {
-            if (mTts.isSpeaking) {
-                mTts.stop();
-            }
-            mTts.shutdown();
+        if (mTts.isSpeaking) {
+            mTts.stop()
         }
+        mTts.shutdown()
     }
 }

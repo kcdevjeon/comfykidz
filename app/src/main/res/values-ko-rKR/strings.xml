@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">너의 운명은</string>
+    <string name="action_about" translatable="true">정보</string>
     <string name="action_settings" translatable="false">설정</string>
-    <string name="reset" translatable="false">다시하기</string>
-    <string name="title" translatable="false">너는 이제…</string>
-    <string name="title_hint" translatable="false">카드를 선택하시오.</string>
+    <string name="reset" translatable="false">다시 선택하기</string>
+    <string name="title" translatable="false">너의 운명은</string>
+    <string name="title_hint" translatable="false">!!카드를 선택하세요!!</string>
     <string name="initialized">준비가 되었습니다.</string>
 </resources>

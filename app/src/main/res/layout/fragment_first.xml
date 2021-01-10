@@ -18,19 +18,38 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/label_title_bottom_padding"
             android:text="@string/title"
             android:textSize="@dimen/label_title_size"
+            bind:layout_constraintTop_toTopOf="parent"
+            bind:layout_constraintLeft_toLeftOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/mute_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:onClick="@{()->vm.onClickMute()}"
+            android:src="@{vm.muteState ? @drawable/ic_no_sound : @drawable/ic_yes_sound}"
+            bind:layout_constraintRight_toRightOf="parent"
             bind:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="146dp"
+            android:layout_height="241dp"
+            android:src="@drawable/friend1"
+            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintTop_toBottomOf="@+id/title" />
 
         <LinearLayout
             android:id="@+id/result"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/layout_top_margin"
-            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintLeft_toRightOf="@+id/imageView"
             bind:layout_constraintTop_toBottomOf="@+id/title">
 
             <TextView
@@ -75,6 +94,7 @@
                 android:text="@{vm.whatValue}"
                 android:textSize="@dimen/text_content_size" />
         </LinearLayout>
+
 
         <include
             layout="@layout/button_table_layout"

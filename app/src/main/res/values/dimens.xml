@@ -3,6 +3,7 @@
     <dimen name="layout_padding">12dp</dimen>
     <dimen name="button_margin">2dp</dimen>
     <dimen name="label_title_size">23sp</dimen>
+    <dimen name="label_title_bottom_padding">25dp</dimen>
     <dimen name="label_description_size">15sp</dimen>
     <dimen name="text_title_size">15sp</dimen>
     <dimen name="text_content_size">23sp</dimen>
