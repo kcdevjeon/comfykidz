@@ -1,9 +1,11 @@
 package com.kccorp.comfykids
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,20 +31,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _whatValue.value = ""
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun onClickCard(view: View) {
         val button = view as Button
         Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text}")
+        var message = ""
         when (clickCount % 3) {
             0 -> {
                 resetValues()
-                _whenValue.value =
-                    whenSet[Integer.parseInt(button.text as String) % whenSet.size]
+                message = whenSet[Integer.parseInt(button.text as String) % whenSet.size]
+                _whenValue.value = message
             }
-            1 -> _whereValue.value =
-                whereSet[Integer.parseInt(button.text as String) % whereSet.size]
-            2 -> _whatValue.value =
-                whatSet[Integer.parseInt(button.text as String) % whatSet.size]
+            1 -> {
+                message = whereSet[Integer.parseInt(button.text as String) % whereSet.size]
+                _whereValue.value = message
+            }
+
+            2 -> {
+                message =
+                    whatSet[Integer.parseInt(button.text as String) % whatSet.size]
+                _whatValue.value = message
+            }
         }
+
+        TtsManager.speak(message)
         clickCount++
     }
 

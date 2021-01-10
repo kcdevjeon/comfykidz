@@ -4,4 +4,5 @@
     <string name="reset" translatable="false">다시하기</string>
     <string name="title" translatable="false">너는 이제…</string>
     <string name="title_hint" translatable="false">카드를 선택하시오.</string>
+    <string name="initialized">준비가 되었습니다.</string>
 </resources>
