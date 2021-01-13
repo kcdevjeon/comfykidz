@@ -6,6 +6,14 @@ plugins {
 
 android {
 
+    signingConfigs {
+        comfykids {
+            storeFile file('C:\\Users\\kcjeo\\Downloads\\ShowYouNext\\comfykids_keystore.jks')
+            storePassword 'irene!020'
+            keyAlias 'upload'
+            keyPassword 'irene1020'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -23,6 +31,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.comfykids
         }
     }
     compileOptions {

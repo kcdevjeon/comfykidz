@@ -1,6 +1,7 @@
 package com.kccorp.comfykids
 
 import android.app.Application
+import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.View
@@ -22,9 +23,37 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val muteState: LiveData<Boolean> = _muteState
     private var clickCount = 0;
 
+    private val SETTINGS_PREF = "settings"
+    private val SETTINGS_PREF_KEY_MUTE = "mute"
+
+    init {
+        _muteState.value = getSettingValue(SETTINGS_PREF_KEY_MUTE)
+    }
+
+    private fun getSettingValue(key: String): Boolean {
+        return getApplication<Application>().getSharedPreferences(
+            SETTINGS_PREF,
+            Context.MODE_PRIVATE
+        )
+            .getBoolean(key, false)
+    }
+
+    private fun setSettingValue(key: String, value: Boolean? = false) {
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            SETTINGS_PREF,
+            Context.MODE_PRIVATE
+        ) ?: return
+        with(sharedPref.edit()) {
+            if (value != null) {
+                putBoolean(key, value)
+            }
+            commit()
+        }
+    }
+
     fun onClickMute() {
         _muteState.value = !(_muteState.value)!!
-        //set preference
+        setSettingValue(SETTINGS_PREF_KEY_MUTE, _muteState.value)
     }
 
     fun onClickReset() {
