@@ -17,7 +17,7 @@ object TtsManager {
         mTts = TextToSpeech(mContext) { state ->
             if (state == TextToSpeech.SUCCESS) {
                 mTts.language = Locale.getDefault()
-                speak(context.getString(R.string.initialized))
+//                speak(context.getString(R.string.initialized))
             }
         }
     }
