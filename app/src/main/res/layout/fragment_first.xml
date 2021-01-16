@@ -36,7 +36,7 @@
             bind:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/friend_image"
             android:layout_width="146dp"
             android:layout_height="241dp"
             android:src="@drawable/friend1"
@@ -48,8 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/layout_top_margin"
-            bind:layout_constraintLeft_toRightOf="@+id/imageView"
+            android:layout_marginTop="@dimen/layout_top_margin"
+            android:background="@drawable/pngwing_com_200px"
+            bind:layout_constraintLeft_toRightOf="@+id/friend_image"
+            bind:layout_constraintRight_toRightOf="parent"
             bind:layout_constraintTop_toBottomOf="@+id/title">
 
             <TextView
@@ -64,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{vm.whenValue}"
+                android:maxLines="2"
                 android:textSize="@dimen/text_content_size" />
 
             <TextView
@@ -78,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{vm.whereValue}"
+                android:maxLines="2"
                 android:textSize="@dimen/text_content_size" />
 
             <TextView
@@ -91,7 +95,9 @@
                 android:id="@+id/value_what"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxWidth="140dp"
                 android:text="@{vm.whatValue}"
+                android:maxLines="2"
                 android:textSize="@dimen/text_content_size" />
         </LinearLayout>
 
@@ -102,6 +108,7 @@
             android:layout_height="wrap_content"
             bind:layout_constraintLeft_toLeftOf="parent"
             bind:layout_constraintRight_toRightOf="parent"
+            bind:layout_constraintTop_toBottomOf="@id/friend_image"
             bind:layout_constraintBottom_toTopOf="@+id/button_reset"
             bind:vm="@{vm}" />
 

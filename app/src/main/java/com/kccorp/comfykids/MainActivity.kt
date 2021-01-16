@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_about -> {
                 val version = packageManager.getPackageInfo(packageName, 0).versionName
-                val message = "제작: 전기철\n디자인: 전채연\n구경: 전소윤,이수희\n\n버젼:$version"
+                val message = "제작: 기철\n디자인: 채연,소윤\n구경: 이수희\n\n버젼:$version"
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 true
             }
