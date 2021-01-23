@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlin.random.Random
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -60,6 +61,40 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         resetValues()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun onClickDraw() {
+        Log.d("COMFYKIDS", "onClickDraw $clickCount")
+        var message = ""
+        when (clickCount % 3) {
+            0 -> {
+                resetValues()
+                message =
+                    RawData.whenSet[getMessageId(RawData.whenSet)]
+                _whenValue.value = message
+            }
+            1 -> {
+                message =
+                    RawData.whereSet[getMessageId(RawData.whereSet)]
+                _whereValue.value = message
+            }
+
+            2 -> {
+                message =
+                    RawData.whatSet[getMessageId(RawData.whatSet)]
+                _whatValue.value = message
+            }
+        }
+
+        if (_muteState.value == false) {
+            TtsManager.speak(message)
+        }
+        clickCount++
+    }
+
+    private fun getMessageId(set: List<String>): Int {
+        return Random.nextInt(0, set.size)
+    }
+
     private fun resetValues() {
         clickCount = 0
         _whenValue.value = ""
@@ -97,5 +132,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         clickCount++
     }
-
 }
