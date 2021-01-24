@@ -104,25 +104,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun onClickCard(view: View) {
+        val randomVal = Random.nextInt(-7, 7)
         val button = view as Button
-        Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text}")
+        Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text} $randomVal")
         var message = ""
         when (clickCount % 3) {
             0 -> {
                 resetValues()
                 message =
-                    RawData.whenSet[Integer.parseInt(button.text as String) % RawData.whenSet.size]
+                    RawData.whenSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whenSet.size]
                 _whenValue.value = message
             }
             1 -> {
                 message =
-                    RawData.whereSet[Integer.parseInt(button.text as String) % RawData.whereSet.size]
+                    RawData.whereSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whereSet.size]
                 _whereValue.value = message
             }
 
             2 -> {
                 message =
-                    RawData.whatSet[Integer.parseInt(button.text as String) % RawData.whatSet.size]
+                    RawData.whatSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whatSet.size]
                 _whatValue.value = message
             }
         }

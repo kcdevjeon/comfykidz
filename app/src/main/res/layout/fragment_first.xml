@@ -23,8 +23,8 @@
             android:paddingBottom="@dimen/label_title_bottom_padding"
             android:text="@string/title"
             android:textSize="@dimen/label_title_size"
-            bind:layout_constraintTop_toTopOf="parent"
-            bind:layout_constraintLeft_toLeftOf="parent"/>
+            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/mute_button"
@@ -47,69 +47,46 @@
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/layout_top_margin"
             android:background="@drawable/pngwing_com_200px"
+            android:orientation="vertical"
+            bind:layout_constraintTop_toTopOf="@+id/friend_image"
             bind:layout_constraintLeft_toRightOf="@+id/friend_image"
             bind:layout_constraintRight_toRightOf="parent"
-            bind:layout_constraintTop_toBottomOf="@+id/title">
-
-            <TextView
-                android:id="@+id/title_when"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/when"
-                android:textSize="@dimen/text_title_size" />
+            android:layout_marginRight="30dp">
 
             <TextView
                 android:id="@+id/value_when"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{vm.whenValue}"
                 android:maxLines="2"
+                android:text="@{vm.whenValue}"
                 android:textSize="@dimen/text_content_size" />
-
-            <TextView
-                android:id="@+id/title_where"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/where"
-                android:textSize="@dimen/text_title_size" />
 
             <TextView
                 android:id="@+id/value_where"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{vm.whereValue}"
                 android:maxLines="2"
+                android:text="@{vm.whereValue}"
                 android:textSize="@dimen/text_content_size" />
-
-            <TextView
-                android:id="@+id/title_what"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/what"
-                android:textSize="@dimen/text_title_size" />
 
             <TextView
                 android:id="@+id/value_what"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxWidth="140dp"
-                android:text="@{vm.whatValue}"
                 android:maxLines="2"
+                android:text="@{vm.whatValue}"
                 android:textSize="@dimen/text_content_size" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_draw"
+        <TextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/draw"
-            android:onClick="@{()->vm.onClickDraw()}"
-            bind:layout_constraintBottom_toTopOf="@+id/button_reset"
-            bind:layout_constraintEnd_toEndOf="parent"
-            bind:layout_constraintStart_toStartOf="parent" />
+            android:text="@string/title_hint"
+            android:textSize="@dimen/label_description_size"
+            bind:layout_constraintTop_toBottomOf="@id/friend_image" />
 
         <Button
             android:id="@+id/button_reset"
@@ -118,8 +95,17 @@
             android:layout_gravity="bottom"
             android:onClick="@{()->vm.onClickReset()}"
             android:text="@string/reset"
-            bind:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="12dp" />
+            bind:layout_constraintBottom_toBottomOf="parent" />
+
+        <include
+            layout="@layout/button_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintRight_toRightOf="parent"
+            bind:layout_constraintBottom_toTopOf="@id/button_reset"
+            bind:layout_constraintTop_toBottomOf="@id/description"
+            bind:vm="@{vm}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
