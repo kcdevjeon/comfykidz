@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlin.random.Random
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -20,7 +21,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val whatValue: LiveData<String> = _whatValue
     private val _muteState = MutableLiveData(false)
     val muteState: LiveData<Boolean> = _muteState
-    private var clickCount = 0
 
     init {
         _muteState.value = getSettingValue(SETTINGS_PREF_KEY_MUTE)
@@ -57,27 +57,37 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun resetValues() {
-        clickCount = 0
         _whenValue.value = ""
         _whereValue.value = ""
         _whatValue.value = ""
     }
 
-    fun onClickCard(view: View) {
-        val button = view as Button
-//        val randomVal = Random.nextInt(0, 100)
-        val cardId = Integer.parseInt(button.text as String)
-        Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text} $cardId")
-        if (clickCount == 3) {
-            resetValues()
-        }
-        val cardType = clickCount % 3
+    fun onClickWhen(view: View) {
+        val cardId = Random.nextInt(0, 100)
+        Log.d("COMFYKIDS", "onClickWhen $cardId")
+        showResult(0, cardId)
+        view.isEnabled = false
+    }
+
+    fun onClickWhere(view: View) {
+        val cardId = Random.nextInt(0, 100)
+        Log.d("COMFYKIDS", "onClickWhere $cardId")
+        showResult(1, cardId)
+//        view.isEnabled = false
+    }
+
+    fun onClickWhat(view: View) {
+        val cardId = Random.nextInt(0, 100)
+        Log.d("COMFYKIDS", "onClickWhat $cardId")
+        showResult(2, cardId)
+//        view.isEnabled = false
+    }
+
+    private fun showResult(cardType: Int, cardId: Int) {
         generateOutputMessage(cardType, cardId).let {
             setOutputMessage(cardType, it)
             speak(it)
         }
-
-        clickCount++
     }
 
     private fun generateOutputMessage(cardType: Int, cardId: Int): String {

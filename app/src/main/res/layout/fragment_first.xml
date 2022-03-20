@@ -16,43 +16,34 @@
         android:padding="@dimen/layout_padding"
         tools:context=".FirstFragment">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/label_title_bottom_padding"
-            android:text="@string/title"
-            android:textSize="@dimen/label_title_size"
-            bind:layout_constraintLeft_toLeftOf="parent"
-            bind:layout_constraintTop_toTopOf="parent" />
-
         <ImageButton
             android:id="@+id/mute_button"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:onClick="@{()->vm.onClickMute()}"
             android:src="@{vm.muteState ? @drawable/ic_no_sound : @drawable/ic_yes_sound}"
+            android:visibility="gone"
             bind:layout_constraintRight_toRightOf="parent"
             bind:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/friend_image"
-            android:layout_width="146dp"
-            android:layout_height="241dp"
+            android:layout_width="100dp"
+            android:layout_height="190dp"
             android:src="@drawable/friend1"
             bind:layout_constraintLeft_toLeftOf="parent"
-            bind:layout_constraintTop_toBottomOf="@+id/title" />
+            bind:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
             android:background="@drawable/pngwing_com_200px"
             android:orientation="vertical"
-            bind:layout_constraintTop_toTopOf="@+id/friend_image"
             bind:layout_constraintLeft_toRightOf="@+id/friend_image"
             bind:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="30dp">
+            bind:layout_constraintTop_toTopOf="@+id/friend_image">
 
             <TextView
                 android:id="@+id/value_when"
@@ -86,26 +77,25 @@
             android:layout_height="wrap_content"
             android:text="@string/title_hint"
             android:textSize="@dimen/label_description_size"
-            bind:layout_constraintTop_toBottomOf="@id/friend_image" />
+            bind:layout_constraintBottom_toTopOf="@id/button_table_layout" />
+
+        <include
+            android:id="@+id/button_table_layout"
+            layout="@layout/button_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_table_height"
+            bind:layout_constraintBottom_toTopOf="@id/button_reset"
+            bind:layout_constraintLeft_toLeftOf="parent"
+            bind:layout_constraintRight_toRightOf="parent"
+            bind:vm="@{vm}" />
 
         <Button
             android:id="@+id/button_reset"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
+            android:layout_height="@dimen/reset_button_height"
             android:layout_gravity="bottom"
             android:onClick="@{()->vm.onClickReset()}"
             android:text="@string/reset"
             bind:layout_constraintBottom_toBottomOf="parent" />
-
-        <include
-            layout="@layout/button_table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            bind:layout_constraintLeft_toLeftOf="parent"
-            bind:layout_constraintRight_toRightOf="parent"
-            bind:layout_constraintBottom_toTopOf="@id/button_reset"
-            bind:layout_constraintTop_toBottomOf="@id/description"
-            bind:vm="@{vm}" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

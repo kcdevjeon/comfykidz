@@ -7,7 +7,7 @@
     <string name="when" translatable="false">when</string>
     <string name="reset" translatable="true">Reset</string>
     <string name="title" translatable="true">You are gonna…</string>
-    <string name="title_hint" translatable="true">Flip three cards to see your future.</string>
+    <string name="title_hint" translatable="true">Press buttons to see your future</string>
     <string name="initialized">initialize completed</string>
     <string name="action_share">Share</string>
     <string name="draw">Draw</string>
