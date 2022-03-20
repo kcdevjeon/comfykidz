@@ -1,12 +1,13 @@
 package com.kccorp.comfykids
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.speech.tts.TextToSpeech
 import androidx.annotation.RequiresApi
 import java.util.*
 
-
+@SuppressLint("StaticFieldLeak")
 object TtsManager {
     private lateinit var mTts: TextToSpeech
     private var mContext: Context? = null

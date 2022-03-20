@@ -6,11 +6,9 @@ import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlin.random.Random
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -22,10 +20,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val whatValue: LiveData<String> = _whatValue
     private val _muteState = MutableLiveData(false)
     val muteState: LiveData<Boolean> = _muteState
-    private var clickCount = 0;
-
-    private val SETTINGS_PREF = "settings"
-    private val SETTINGS_PREF_KEY_MUTE = "mute"
+    private var clickCount = 0
 
     init {
         _muteState.value = getSettingValue(SETTINGS_PREF_KEY_MUTE)
@@ -61,40 +56,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         resetValues()
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun onClickDraw() {
-        Log.d("COMFYKIDS", "onClickDraw $clickCount")
-        var message = ""
-        when (clickCount % 3) {
-            0 -> {
-                resetValues()
-                message =
-                    RawData.whenSet[getMessageId(RawData.whenSet)]
-                _whenValue.value = message
-            }
-            1 -> {
-                message =
-                    RawData.whereSet[getMessageId(RawData.whereSet)]
-                _whereValue.value = message
-            }
-
-            2 -> {
-                message =
-                    RawData.whatSet[getMessageId(RawData.whatSet)]
-                _whatValue.value = message
-            }
-        }
-
-        if (_muteState.value == false) {
-            TtsManager.speak(message)
-        }
-        clickCount++
-    }
-
-    private fun getMessageId(set: List<String>): Int {
-        return Random.nextInt(0, set.size)
-    }
-
     private fun resetValues() {
         clickCount = 0
         _whenValue.value = ""
@@ -102,35 +63,50 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _whatValue.value = ""
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun onClickCard(view: View) {
-        val randomVal = Random.nextInt(-7, 7)
         val button = view as Button
-        Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text} $randomVal")
-        var message = ""
-        when (clickCount % 3) {
-            0 -> {
-                resetValues()
-                message =
-                    RawData.whenSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whenSet.size]
-                _whenValue.value = message
-            }
-            1 -> {
-                message =
-                    RawData.whereSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whereSet.size]
-                _whereValue.value = message
-            }
-
-            2 -> {
-                message =
-                    RawData.whatSet[(Integer.parseInt(button.text as String) + randomVal) % RawData.whatSet.size]
-                _whatValue.value = message
-            }
+//        val randomVal = Random.nextInt(0, 100)
+        val cardId = Integer.parseInt(button.text as String)
+        Log.d("COMFYKIDS", "onClickCard $clickCount ${button.text} $cardId")
+        if (clickCount == 3) {
+            resetValues()
+        }
+        val cardType = clickCount % 3
+        generateOutputMessage(cardType, cardId).let {
+            setOutputMessage(cardType, it)
+            speak(it)
         }
 
-        if (_muteState.value == false) {
-            TtsManager.speak(message)
-        }
         clickCount++
+    }
+
+    private fun generateOutputMessage(cardType: Int, cardId: Int): String {
+        return when (cardType) {
+            0 -> RawData.whenSet[cardId % RawData.whenSet.size]
+            1 -> RawData.whereSet[cardId % RawData.whereSet.size]
+            2 -> RawData.whatSet[cardId % RawData.whatSet.size]
+            else -> ""
+        }
+    }
+
+    private fun setOutputMessage(cardType: Int, message: String) {
+        when (cardType) {
+            0 -> _whenValue.value = message
+            1 -> _whereValue.value = message
+            2 -> _whatValue.value = message
+        }
+    }
+
+    private fun speak(message: String) {
+        if (_muteState.value == false) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                TtsManager.speak(message)
+            }
+        }
+    }
+
+    companion object {
+        private const val SETTINGS_PREF = "settings"
+        private const val SETTINGS_PREF_KEY_MUTE = "mute"
     }
 }
